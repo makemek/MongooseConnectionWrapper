@@ -5,12 +5,12 @@ var notImplemented = 'Not implemented';
 describe('Database connection module', function() {
 	
 	describe('Invalid config file', function() {
-		it('No config file', function() {
-			throw notImplemented;
+		it('Empty string', function() {
+			expect(module.connect2Database('').to.throw(Error));
 		});
 
 		it('Non-existant file', function() {
-			throw notImplemented;
+			expect(module.connect2Database('@@@@@@@').to.throw(Error));
 		}); 
 	});
 
