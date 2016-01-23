@@ -16,6 +16,17 @@ describe('Database connection module', function() {
 			expect(configFileWithNoDatabase).to.throw('No database selected');
 		});
 	});
+
+	describe('Connection to mongodb via mongoose', function() {
+
+		var config = require('../db_config/config');
+
+		it('Establish and terminate connection', function() {
+			var connection = module.connect(config);
+			expect(connection).to.be.an('object');
+			expect(module.disconnect.bind(module, connection)).to.not.throw();
+		});
+	});
 });
 
 function createBindConnectMethod(param) {
