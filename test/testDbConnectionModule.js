@@ -4,23 +4,20 @@ var notImplemented = 'Not implemented';
 
 describe('Database connection module', function() {
 	
-	describe('Invalid config file', function() {
-		it('Empty string', function() {
-			expect(module.connect.bind(module, '')).to.throw(Error);
-		});
+	describe('invalid config file', function() {
+		var configFileWithNoHost = createBindConnectMethod(require('./config_no_host'));
+		var configFileWithNoDatabase = createBindConnectMethod(require('./config_no_db'));
 
-		it('Non-existant file', function() {
-			expect(module.connect.bind(module, '')).to.throw(Error);
-		}); 
-	});
-
-	describe('Valid config file', function() {
 		it('Host not defined', function() {
-			throw notImplemented;
+			expect(configFileWithNoHost).to.throw(new Error('Host is empty'));
 		});
 
 		it('Database not defined', function() {
-			throw notImplemented;
+			expect(configFileWithNoDatabase).to.throw(new Error('Database is empty'));
 		});
 	});
 });
+
+function createBindConnectMethod(param) {
+	return module.connect.bind(module, param);
+}
