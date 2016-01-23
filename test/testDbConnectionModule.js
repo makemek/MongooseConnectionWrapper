@@ -1,10 +1,9 @@
 var module = require('../lib/connection');
 var expect = require('chai').expect
-var notImplemented = 'Not implemented';
 
 describe('Database connection module', function() {
 	
-	describe('invalid config file', function() {
+	describe('Invalid config file', function() {
 		var configFileWithNoHost = createBindConnectMethod(require('./config_no_host'));
 		var configFileWithNoDatabase = createBindConnectMethod(require('./config_no_db'));
 
