@@ -6,11 +6,11 @@ describe('Database connection module', function() {
 	
 	describe('Invalid config file', function() {
 		it('Empty string', function() {
-			expect(module.connect2Database('').to.throw(Error));
+			expect(module.connect.bind(module, '')).to.throw(Error);
 		});
 
 		it('Non-existant file', function() {
-			expect(module.connect2Database('@@@@@@@').to.throw(Error));
+			expect(module.connect.bind(module, '')).to.throw(Error);
 		}); 
 	});
 
