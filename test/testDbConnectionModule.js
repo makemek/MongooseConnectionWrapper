@@ -9,11 +9,11 @@ describe('Database connection module', function() {
 		var configFileWithNoDatabase = createBindConnectMethod(require('./config_no_db'));
 
 		it('Host not defined', function() {
-			expect(configFileWithNoHost).to.throw(new Error('Host is empty'));
+			expect(configFileWithNoHost).to.throw('Host is empty');
 		});
 
 		it('Database not defined', function() {
-			expect(configFileWithNoDatabase).to.throw(new Error('Database is empty'));
+			expect(configFileWithNoDatabase).to.throw('No database selected');
 		});
 	});
 });
