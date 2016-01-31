@@ -24,7 +24,7 @@ describe('Database connection module', function() {
 
 	describe('Connection to mongodb via mongoose', function() {
 
-		var config = require('../db_config/config');
+		var config = require('./config_db_default');
 
 		it('Establish and terminate connection', function() {
 			var validConnection = new Connection(config);
