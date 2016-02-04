@@ -1,4 +1,5 @@
-var Connection = require('../lib/connection');
+var module = require('../index');
+var Connection = module.connection;
 var expect = require('chai').expect
 var mongoose = require('mongoose');
 
