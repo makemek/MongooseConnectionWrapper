@@ -5,4 +5,4 @@ var connect2database = function(configJs) {
 	return db.connect();
 }
 
-module.exports = connect2database();
+module.exports = connect2database;
