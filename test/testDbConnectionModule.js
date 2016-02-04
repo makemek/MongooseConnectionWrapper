@@ -24,8 +24,8 @@ describe('Database connection module', function() {
 		it('Establish and terminate connection', function() {
 			expect(connection).to.be.an('object');
 
-			var mongoose = connection.open();
-			expect(mongoose).to.be.an('object');
+			var db = connection.open();
+			expect(db).to.be.an('object');
 
 			expect(connection
 				.close
