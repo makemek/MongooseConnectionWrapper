@@ -1,4 +1,4 @@
-var Connection = require('../lib/connection.js');
+var Connection = require('./lib/connection.js');
 
 var connect2database = function(configJs) {
 	var db = new Connection(configJs);
