@@ -1,5 +1,5 @@
 {
-  "name": "dms_db_api",
+  "name": "DBConnection",
   "version": "1.0.0",
   "description": "An API to IC DMS database",
   "main": "index.js",
