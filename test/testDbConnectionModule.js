@@ -1,42 +1,83 @@
-var Connection = require('../lib/connection');
+var module = require('../index');
+var Connection = module.connection;
 var expect = require('chai').expect
+var mongoose = require('mongoose');
+
+var config = {};
+config.host = '127.0.0.1';
+config.db = 'test';
+config.dummyDb = 'dummy';
+config.port = '27017';
 
 describe('Database connection module', function() {
 	
-	describe('Invalid config file', function() {
-		var configFileWithNoHost = new Connection(require('./config_no_host'));
-		var configFileWithNoDatabase = new Connection(require('./config_no_db'));
-
-		it('Host not defined', function() {
-			expect(configFileWithNoHost
-				.connect
-				.bind(configFileWithNoHost))
-			.to.throw('Host is empty');
-		});
-
-		it('Database not defined', function() {
-			expect(configFileWithNoDatabase
-				.connect
-				.bind(configFileWithNoDatabase))
-			.to.throw('No database selected');
-		});
+	var connection;
+	beforeEach(function() {
+		closeAllConnections();
+		connection = new Connection(config.host, config.db, config.port);
+	});
+	afterEach(function() {
+		closeAllConnections();
 	});
 
 	describe('Connection to mongodb via mongoose', function() {
 
-		var config = require('./config_db_default');
-
 		it('Establish and terminate connection', function() {
-			var validConnection = new Connection(config);
-			expect(validConnection).to.be.an('object');
+			expect(connection).to.be.an('object');
 
-			var mongoose = validConnection.connect();
-			expect(mongoose).to.be.an('object');
+			var db = connection.open();
+			expect(db).to.be.an('object');
 
-			expect(validConnection
+			expect(connection
 				.close
-				.bind(validConnection))
+				.bind(connection))
+			.to.not.throw();
+		});
+
+		it('Close already terminated connection', function() {
+			connection.open();
+			connection.close();
+			expect(connection
+				.close
+				.bind(connection))
 			.to.not.throw();
 		});
 	});
 });
+
+describe('After connected, the returned value should have the same functionalities as mongoose.createConnection()', function() {
+	var connection;
+	var db;
+	var Dummymodel;
+
+	beforeEach(function() {
+		connection = new Connection(config.host, config.dummyDb, config.port);
+		db = connection.open();
+
+		var schema = {
+			dummy1: String,
+			dummy2: Number
+		};
+
+		Dummymodel = db.model('dummyCollection', schema);
+	});
+
+	afterEach(function() {
+		closeAllConnections();
+		db.db.dropDatabase();
+	});
+
+	it('Add dummy data', function() {
+
+		var data = new Dummymodel({
+			dummy1: 'Hello',
+			dummy2: 0
+		});
+
+		data.save();
+	});
+});
+
+function closeAllConnections() {
+	mongoose.connection.close();
+}

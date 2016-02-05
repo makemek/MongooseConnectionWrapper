@@ -1,5 +1,5 @@
 {
-  "name": "dms_db_api",
+  "name": "mongooseConnectionWrapper",
   "version": "1.0.0",
   "description": "An API to IC DMS database",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^3.4.1",
+    "kerberos": "0.0.18",
     "mocha": "^2.3.4",
     "mongoose": "^4.3.6"
   }
