@@ -1,10 +1,15 @@
 {
   "name": "mongooseConnectionWrapper",
-  "version": "1.0.0",
-  "description": "An API to IC DMS database",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A mongoose wrapper",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/makemek/mongooseConnectionWrapper.git"
   },
   "author": "MakeMEK",
   "license": "ISC",
