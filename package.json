@@ -1,5 +1,5 @@
 {
-  "name": "DBConnection",
+  "name": "mongooseConnectionWrapper",
   "version": "1.0.0",
   "description": "An API to IC DMS database",
   "main": "index.js",
