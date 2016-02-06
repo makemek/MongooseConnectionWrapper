@@ -59,6 +59,7 @@ describe('After connected, the returned value should have the same functionaliti
 	var Dummymodel;
 
 	beforeEach(function() {
+		closeAllConnections();
 		connection = new Connection(config.host, config.dummyDb, config.port);
 		db = connection.open();
 
@@ -71,8 +72,8 @@ describe('After connected, the returned value should have the same functionaliti
 	});
 
 	afterEach(function() {
+		dropDB(db);
 		closeAllConnections();
-		db.db.dropDatabase();
 	});
 
 	it('Add dummy data', function() {
@@ -85,6 +86,14 @@ describe('After connected, the returned value should have the same functionaliti
 		data.save();
 	});
 });
+
+function dropDB(mongooseDbConnectionInstance) {
+	mongooseDbConnectionInstance.on('open', function() {
+		mongooseDbConnectionInstance.db.dropDatabase(function(err, result) {
+			expect(result).to.be.true;
+		});
+	});
+}
 
 function closeAllConnections() {
 	mongoose.connection.close();
