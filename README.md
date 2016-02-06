@@ -1,9 +1,11 @@
 # MongooseConnectionWrapper
-```Mongoose``` wrapper for creating database connection to MongoDB via Mongoose with ability to automatically disconnect from MongoDB when Node.js process is terminated.
+Facade class for creating a safer database connection to ```MongoDB``` via ```Mongoose``` with simpler interfaces.
+It can also automatically disconnect from MongoDB when Node.js process is terminated.
 This module exposes frequently used mongoose's interfaces such as ```Mongoose#createConnection``` and ```Mongoose#Schema```.
 
 ## Installation
-```npm install git://github.com/makemek/MongooseWrapper.git#dev```
+Stable release ```npm install git://github.com/makemek/MongooseWrapper.git```
+Latest build ```npm install git://github.com/makemek/MongooseWrapper.git#dev```
 
 ## Usage
 ```javascript
