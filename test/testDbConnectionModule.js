@@ -34,6 +34,14 @@ describe('Database connection module', function() {
 			.to.not.throw();
 		});
 
+		it('Open already established connection', function() {
+			connection.open();
+			expect(connection
+				.open
+				.bind(connection))
+			.to.not.throw();
+		});
+
 		it('Close already terminated connection', function() {
 			connection.open();
 			connection.close();
