@@ -1,5 +1,5 @@
 {
-  "name": "mongooseConnectionWrapper",
+  "name": "monnoob",
   "version": "0.0.1",
   "private": true,
   "description": "A mongoose wrapper",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/makemek/mongooseConnectionWrapper.git"
+    "url": "git://github.com/makemek/monnoob.git"
   },
   "author": "MakeMEK",
   "license": "ISC",

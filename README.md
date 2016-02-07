@@ -1,26 +1,30 @@
-# MongooseConnectionWrapper
+# monnoob
 Facade class for creating a safer database connection to ```MongoDB``` via ```Mongoose``` with simpler interfaces.
 It can also automatically disconnect from MongoDB when Node.js process is terminated.
 This module exposes frequently used mongoose's interfaces such as ```Mongoose#createConnection``` and ```Mongoose#Schema```.
 
 ## Installation
-Stable release ```npm install git://github.com/makemek/MongooseWrapper.git```
-Latest build ```npm install git://github.com/makemek/MongooseWrapper.git#dev```
+Stable release ```npm install git://github.com/makemek/monnoob.git```  
+Latest build ```npm install git://github.com/makemek/monnoob.git#dev```  
 
 ## Usage
 ```javascript
-var wrapper = require(mongooseConnectionWrapper); 
+var wrapper = require('monnoob'); 
 var connection = new wrapper.connection(host, database, port, username, password);
-var db = connection.open(); // 'db' is the returned value from Mongoose#createConnection
+connection.open(); // Establish a connection to the database
 /*
 Do some stuff
 ...
 */
-connection.close();
+
+// To compile a schema, you can do so just like mongoose
+var model = connection.model(schemaName, schema);
+
+connection.close(); // Terminate a connection
 ```
 
 ## Extra Utilities
-MongooseConnectionWrapper exposes some utility so that It can be used without having to ```require('mongoose')```  
+monnoob exposes some utility so that It can be used without having to ```require('mongoose')```  
 
-**Interface**                         | **Output**      |  
-MongooseConnectionWrapper#Schema      | Mongoose#Schema |  
+**Interface**       | **Output**      |  
+monnoob#Schema      | Mongoose#Schema |  
