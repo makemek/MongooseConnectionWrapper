@@ -25,8 +25,7 @@ describe('Database connection module', function() {
 		it('Establish and terminate connection', function() {
 			expect(connection).to.be.an('object');
 
-			var db = connection.open();
-			expect(db).to.be.an('object');
+			connection.open();
 
 			expect(connection
 				.close
@@ -39,7 +38,7 @@ describe('Database connection module', function() {
 			expect(connection
 				.open
 				.bind(connection))
-			.to.not.throw();
+			.to.throw();
 		});
 
 		it('Close already terminated connection', function() {
@@ -61,18 +60,18 @@ describe('After connected, the returned value should have the same functionaliti
 	beforeEach(function() {
 		closeAllConnections();
 		connection = new Connection(config.host, config.dummyDb, config.port);
-		db = connection.open();
+		connection.open();
 
 		var schema = {
 			dummy1: String,
 			dummy2: Number
 		};
 
-		Dummymodel = db.model('dummyCollection', schema);
+		Dummymodel = connection.model('dummyCollection', schema);
 	});
 
 	afterEach(function() {
-		dropDB(db);
+		dropDB();
 		closeAllConnections();
 	});
 
@@ -85,15 +84,20 @@ describe('After connected, the returned value should have the same functionaliti
 
 		data.save();
 	});
+
+	function dropDB() {
+		var rawConnection = mongoose.createConnection(config.host, config.dummyDb, config.port);
+		
+		rawConnection.on('open', function() {
+			rawConnection.db.dropDatabase(function(err, result) {
+				expect(result).to.be.true;
+			});
+		});
+
+		rawConnection.close();
+	}
 });
 
-function dropDB(mongooseDbConnectionInstance) {
-	mongooseDbConnectionInstance.on('open', function() {
-		mongooseDbConnectionInstance.db.dropDatabase(function(err, result) {
-			expect(result).to.be.true;
-		});
-	});
-}
 
 function closeAllConnections() {
 	mongoose.connection.close();
